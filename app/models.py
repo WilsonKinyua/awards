@@ -85,3 +85,24 @@ class UsabilityRate(models.Model):
 
     def __str__(self):
         return self.project.title
+
+
+# UsabilityRate models
+class ContentRate(models.Model):
+    project = models.ForeignKey(Project, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    rate = models.IntegerField(default=0)
+
+    def save_content_rate(self):
+        self.save()
+
+    def delete_content_rate(self):
+        self.delete()
+
+    @classmethod
+    def get_content_rate(cls, id):
+        content_rate = ContentRate.objects.filter(project=id).all()
+        return content_rate
+
+    def __str__(self):
+        return self.project.title
