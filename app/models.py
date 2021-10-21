@@ -10,7 +10,7 @@ from django.contrib.auth.models import User
 
 # project models
 class Project(models.Model):
-    user=models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=250)
     description = models.CharField(max_length=250)
     image = CloudinaryField("image")
@@ -53,10 +53,10 @@ class DesignRate(models.Model):
 
     def save_design_rate(self):
         self.save()
-    
+
     def delete_design_rate(self):
         self.delete()
-    
+
     @classmethod
     def get_design_rate(cls, id):
         design_rate = DesignRate.objects.filter(project=id).all()
@@ -65,4 +65,23 @@ class DesignRate(models.Model):
     def __str__(self):
         return self.project.title
 
-    
+
+# UsabilityRate models
+class UsabilityRate(models.Model):
+    project = models.ForeignKey(Project, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    rate = models.IntegerField(default=0)
+
+    def save_usability_rate(self):
+        self.save()
+
+    def delete_usability_rate(self):
+        self.delete()
+
+    @classmethod
+    def get_usability_rate(cls, id):
+        usability_rate = UsabilityRate.objects.filter(project=id).all()
+        return usability_rate
+
+    def __str__(self):
+        return self.project.title
