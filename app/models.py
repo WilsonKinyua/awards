@@ -12,9 +12,30 @@ from django.contrib.auth.models import User
 class Project(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=250)
-    description = models.CharField(max_length=250)
+    description = models.TextField()
     image = CloudinaryField("image")
     url = models.URLField(blank=True)
+
+    @classmethod
+    def search_by_title(cls, search_term):
+        projects = cls.objects.filter(title__icontains=search_term)
+        return projects
+    
+    @classmethod
+    def get_project_by_id(cls, id):
+        project = cls.objects.get(id=id)
+        return project
+
+    @classmethod
+    def get_all_projects(cls):
+        projects = cls.objects.all()
+        return projects
+
+    @classmethod
+    def get_all_projects_by_user(cls, user):
+        projects = cls.objects.filter(user=user)
+        return projects
+
 
     def save_project(self):
         self.save()
@@ -61,6 +82,17 @@ class DesignRate(models.Model):
     def get_design_rate(cls, id):
         design_rate = DesignRate.objects.filter(project=id).all()
         return design_rate
+
+    # calculate average design rate
+    @classmethod
+    def design_rate_average(cls, id):
+        design_rate = DesignRate.objects.filter(project=id).all()
+        sum = 0
+        for rate in design_rate:
+            sum += rate.rate
+        average = sum / len(design_rate)
+        return average
+
 
     def __str__(self):
         return self.project.title
