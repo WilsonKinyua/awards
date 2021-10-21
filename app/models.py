@@ -20,7 +20,7 @@ class Project(models.Model):
     def search_by_title(cls, search_term):
         projects = cls.objects.filter(title__icontains=search_term)
         return projects
-    
+
     @classmethod
     def get_project_by_id(cls, id):
         project = cls.objects.get(id=id)
@@ -35,7 +35,6 @@ class Project(models.Model):
     def get_all_projects_by_user(cls, user):
         projects = cls.objects.filter(user=user)
         return projects
-
 
     def save_project(self):
         self.save()
@@ -93,7 +92,6 @@ class DesignRate(models.Model):
         average = sum / len(design_rate)
         return average
 
-
     def __str__(self):
         return self.project.title
 
@@ -103,6 +101,16 @@ class UsabilityRate(models.Model):
     project = models.ForeignKey(Project, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     rate = models.IntegerField(default=0)
+
+    # calculate average usablity rate
+    @classmethod
+    def usability_rate_average(cls, id):
+        usability_rate = UsabilityRate.objects.filter(project=id).all()
+        sum = 0
+        for rate in usability_rate:
+            sum += rate.rate
+        average = sum / len(usability_rate)
+        return average
 
     def save_usability_rate(self):
         self.save()
@@ -124,6 +132,15 @@ class ContentRate(models.Model):
     project = models.ForeignKey(Project, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     rate = models.IntegerField(default=0)
+
+    @classmethod
+    def content_rate_average(cls, id):
+        content_rate = ContentRate.objects.filter(project=id).all()
+        sum = 0
+        for rate in content_rate:
+            sum += rate.rate
+        average = sum / len(content_rate)
+        return average
 
     def save_content_rate(self):
         self.save()
