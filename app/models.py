@@ -7,7 +7,6 @@ from django.contrib.auth.models import User
 
 # Create your models here.
 
-
 # project models
 class Project(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -47,8 +46,8 @@ class Project(models.Model):
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     profile_photo = CloudinaryField("image")
-    bio = models.TextField(max_length=250)
-    contact = models.CharField(max_length=250)
+    bio = models.TextField(max_length=250, blank=True, null=True)
+    contact = models.CharField(max_length=250, blank=True, null=True)
 
     def save_profile(self):
         self.save()
