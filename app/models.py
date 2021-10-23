@@ -5,7 +5,7 @@ import datetime as dt
 from cloudinary.models import CloudinaryField
 from django.contrib.auth.models import User
 
-# Create your models here.
+
 
 # project models
 class Project(models.Model):
@@ -14,6 +14,8 @@ class Project(models.Model):
     description = models.TextField()
     image = CloudinaryField("image")
     url = models.URLField(blank=True)
+    location = models.CharField(max_length=100, default='Nairobi')
+    date=models.DateTimeField(auto_now_add=True, null=True)
 
     @classmethod
     def search_by_title(cls, search_term):

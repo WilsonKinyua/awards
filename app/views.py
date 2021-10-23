@@ -8,8 +8,9 @@ import cloudinary.api
 # Create your views here.
 
 
-def index(request):
-    return render(request, "index.html")
+def index(request): # Home page
+    project = Project.objects.all()
+    return render(request, "index.html", {"projects": project})
 
 
 @login_required(login_url="/accounts/login/")
@@ -79,6 +80,7 @@ def save_project(request):
         current_user = request.user
 
         title = request.POST["title"]
+        location = request.POST["location"]
         description = request.POST["description"]
         url = request.POST["url"]
         image = request.FILES["image"]
@@ -90,6 +92,7 @@ def save_project(request):
         project = Project(
             user_id=current_user.id,
             title=title,
+            location=location,
             description=description,
             url=url,
             image=image_url,

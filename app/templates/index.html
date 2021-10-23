@@ -52,19 +52,20 @@
 <section class="blog-section" id="posts">
     <div class="container mt-5">
         <div class="row mt-4">
+            {% for project in projects %}
             <div class="col-md-3">
                 <div class="card mb-4 post-card">
-                    <img src="https://assets.awwwards.com/awards/media/cache/thumb_417_299/submissions/2021/10/616d8e692f0ac358930508.png"
+                    <img src="{{ project.image.url }}"
                         class="card-img-top" alt="Personal">
                     <div class="card-body">
-                        <a href="post/2.html">
-                            <h6 class="fade-item mb-2">Feldman.Studio</h6>
+                        <a href="">
+                            <h6 class="fade-item mb-2">{{ project.title }}</h6>
                             <div class="d-flex justify-content-between location-date">
                                 <div>
-                                    <p>From France</p>
+                                    <p class="text-uppercase">{{ project.location }}</p>
                                 </div>
                                 <div>
-                                    <p>October 21, 2021</p>
+                                    <p>{{ project.date|date}}</p>
                                 </div>
                             </div>
                             <div class="d-flex justify-content-between mt-2">
@@ -75,7 +76,7 @@
                                             alt="">
                                     </div>
                                     <div>
-                                        <p class="author mt-1">BY <strong>GARDEN EIGHT</strong></p>
+                                        <p class="author mt-1 text-uppercase">BY <strong>{{ project.user.first_name }} {{ project.user.last_name }}</strong></p>
                                     </div>
                                 </div>
                                 <div class="display-on-hover">
@@ -86,247 +87,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-3">
-                <div class="card mb-4 post-card">
-                    <img src="https://assets.awwwards.com/awards/media/cache/thumb_417_299/submissions/2021/10/616d8fa0c2018818605992.png"
-                        class="card-img-top" alt="Personal">
-                    <div class="card-body">
-                        <a href="post/2.html">
-                            <h6 class="fade-item mb-2">Feldman.Studio</h6>
-                            <div class="d-flex justify-content-between location-date">
-                                <div>
-                                    <p>From France</p>
-                                </div>
-                                <div>
-                                    <p>October 21, 2021</p>
-                                </div>
-                            </div>
-                            <div class="d-flex justify-content-between mt-2">
-                                <div class="d-flex justify-content-start">
-                                    <div>
-                                        <img class="poster-img"
-                                            src="https://assets.awwwards.com/awards/media/cache/thumb_user_70/avatar/436194/59808465559b0.jpg"
-                                            alt="">
-                                    </div>
-                                    <div>
-                                        <p class="author mt-1">BY <strong>GARDEN EIGHT</strong></p>
-                                    </div>
-                                </div>
-                                <div class="display-on-hover">
-                                    <a href="" class="btn btn-custome">Vote Now</a>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="card mb-4 post-card">
-                    <img src="https://assets.awwwards.com/awards/media/cache/thumb_417_299/submissions/2021/10/616d8e692f0ac358930508.png"
-                        class="card-img-top" alt="Personal">
-                    <div class="card-body">
-                        <a href="post/2.html">
-                            <h6 class="fade-item mb-2">Feldman.Studio</h6>
-                            <div class="d-flex justify-content-between location-date">
-                                <div>
-                                    <p>From France</p>
-                                </div>
-                                <div>
-                                    <p>October 21, 2021</p>
-                                </div>
-                            </div>
-                            <div class="d-flex justify-content-between mt-2">
-                                <div class="d-flex justify-content-start">
-                                    <div>
-                                        <img class="poster-img"
-                                            src="https://assets.awwwards.com/awards/media/cache/thumb_user_70/avatar/436194/59808465559b0.jpg"
-                                            alt="">
-                                    </div>
-                                    <div>
-                                        <p class="author mt-1">BY <strong>GARDEN EIGHT</strong></p>
-                                    </div>
-                                </div>
-                                <div class="display-on-hover">
-                                    <a href="" class="btn btn-custome">Vote Now</a>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-3">
-                <div class="card mb-4 post-card">
-                    <img src="https://assets.awwwards.com/awards/media/cache/thumb_417_299/submissions/2021/10/616d8e692f0ac358930508.png"
-                        class="card-img-top" alt="Personal">
-                    <div class="card-body">
-                        <a href="post/2.html">
-                            <h6 class="fade-item mb-2">Feldman.Studio</h6>
-                            <div class="d-flex justify-content-between location-date">
-                                <div>
-                                    <p>From France</p>
-                                </div>
-                                <div>
-                                    <p>October 21, 2021</p>
-                                </div>
-                            </div>
-                            <div class="d-flex justify-content-between mt-2">
-                                <div class="d-flex justify-content-start">
-                                    <div>
-                                        <img class="poster-img"
-                                            src="https://assets.awwwards.com/awards/media/cache/thumb_user_70/avatar/436194/59808465559b0.jpg"
-                                            alt="">
-                                    </div>
-                                    <div>
-                                        <p class="author mt-1">BY <strong>GARDEN EIGHT</strong></p>
-                                    </div>
-                                </div>
-                                <div class="display-on-hover">
-                                    <a href="" class="btn btn-custome">Vote Now</a>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-3">
-                <div class="card mb-4 post-card">
-                    <img src="https://assets.awwwards.com/awards/media/cache/thumb_417_299/submissions/2021/10/616d8e692f0ac358930508.png"
-                        class="card-img-top" alt="Personal">
-                    <div class="card-body">
-                        <a href="post/2.html">
-                            <h6 class="fade-item mb-2">Feldman.Studio</h6>
-                            <div class="d-flex justify-content-between location-date">
-                                <div>
-                                    <p>From France</p>
-                                </div>
-                                <div>
-                                    <p>October 21, 2021</p>
-                                </div>
-                            </div>
-                            <div class="d-flex justify-content-between mt-2">
-                                <div class="d-flex justify-content-start">
-                                    <div>
-                                        <img class="poster-img"
-                                            src="https://assets.awwwards.com/awards/media/cache/thumb_user_70/avatar/436194/59808465559b0.jpg"
-                                            alt="">
-                                    </div>
-                                    <div>
-                                        <p class="author mt-1">BY <strong>GARDEN EIGHT</strong></p>
-                                    </div>
-                                </div>
-                                <div class="display-on-hover">
-                                    <a href="" class="btn btn-custome">Vote Now</a>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="card mb-4 post-card">
-                    <img src="https://assets.awwwards.com/awards/media/cache/thumb_417_299/submissions/2021/10/616d8fa0c2018818605992.png"
-                        class="card-img-top" alt="Personal">
-                    <div class="card-body">
-                        <a href="post/2.html">
-                            <h6 class="fade-item mb-2">Feldman.Studio</h6>
-                            <div class="d-flex justify-content-between location-date">
-                                <div>
-                                    <p>From France</p>
-                                </div>
-                                <div>
-                                    <p>October 21, 2021</p>
-                                </div>
-                            </div>
-                            <div class="d-flex justify-content-between mt-2">
-                                <div class="d-flex justify-content-start">
-                                    <div>
-                                        <img class="poster-img"
-                                            src="https://assets.awwwards.com/awards/media/cache/thumb_user_70/avatar/436194/59808465559b0.jpg"
-                                            alt="">
-                                    </div>
-                                    <div>
-                                        <p class="author mt-1">BY <strong>GARDEN EIGHT</strong></p>
-                                    </div>
-                                </div>
-                                <div class="display-on-hover">
-                                    <a href="" class="btn btn-custome">Vote Now</a>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="card mb-4 post-card">
-                    <img src="https://assets.awwwards.com/awards/media/cache/thumb_417_299/submissions/2021/10/616d8e692f0ac358930508.png"
-                        class="card-img-top" alt="Personal">
-                    <div class="card-body">
-                        <a href="post/2.html">
-                            <h6 class="fade-item mb-2">Feldman.Studio</h6>
-                            <div class="d-flex justify-content-between location-date">
-                                <div>
-                                    <p>From France</p>
-                                </div>
-                                <div>
-                                    <p>October 21, 2021</p>
-                                </div>
-                            </div>
-                            <div class="d-flex justify-content-between mt-2">
-                                <div class="d-flex justify-content-start">
-                                    <div>
-                                        <img class="poster-img"
-                                            src="https://assets.awwwards.com/awards/media/cache/thumb_user_70/avatar/436194/59808465559b0.jpg"
-                                            alt="">
-                                    </div>
-                                    <div>
-                                        <p class="author mt-1">BY <strong>GARDEN EIGHT</strong></p>
-                                    </div>
-                                </div>
-                                <div class="display-on-hover">
-                                    <a href="" class="btn btn-custome">Vote Now</a>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-3">
-                <div class="card mb-4 post-card">
-                    <img src="https://assets.awwwards.com/awards/media/cache/thumb_417_299/submissions/2021/10/616d8e692f0ac358930508.png"
-                        class="card-img-top" alt="Personal">
-                    <div class="card-body">
-                        <a href="post/2.html">
-                            <h6 class="fade-item mb-2">Feldman.Studio</h6>
-                            <div class="d-flex justify-content-between location-date">
-                                <div>
-                                    <p>From France</p>
-                                </div>
-                                <div>
-                                    <p>October 21, 2021</p>
-                                </div>
-                            </div>
-                            <div class="d-flex justify-content-between mt-2">
-                                <div class="d-flex justify-content-start">
-                                    <div>
-                                        <img class="poster-img"
-                                            src="https://assets.awwwards.com/awards/media/cache/thumb_user_70/avatar/436194/59808465559b0.jpg"
-                                            alt="">
-                                    </div>
-                                    <div>
-                                        <p class="author mt-1">BY <strong>GARDEN EIGHT</strong></p>
-                                    </div>
-                                </div>
-                                <div class="display-on-hover">
-                                    <a href="" class="btn btn-custome">Vote Now</a>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-            </div>
+            {% endfor %}
 
         </div>
     </div>
