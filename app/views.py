@@ -15,8 +15,9 @@ def index(request):
 @login_required(login_url="/accounts/login/")
 def profile(request):  # view profile
     current_user = request.user
-    profile = Profile.objects.filter(user_id=current_user.id).first()
-    return render(request, "profile.html", {"profile": profile})
+    profile = Profile.objects.filter(user_id=current_user.id).first() # get profile
+    project=Project.objects.filter(user_id=current_user.id).all() # get all projects
+    return render(request, "profile.html", {"profile": profile, "images": project})
 
 
 @login_required(login_url="/accounts/login/")

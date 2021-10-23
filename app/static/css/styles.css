@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Lobster&amp;display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400&amp;display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Merienda:wght@700&amp;display=swap");
-@import url('https://fonts.googleapis.com/css2?family=Aclonica&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Aclonica&display=swap");
 
 body {
   margin: 0;
@@ -75,7 +75,7 @@ a:focus {
   font-size: 2rem;
   color: rgb(0, 0, 0);
   text-transform: uppercase;
-  font-family: 'Aclonica', sans-serif;
+  font-family: "Aclonica", sans-serif;
 }
 .nav-link:hover {
   color: var(--main-color);
@@ -345,7 +345,8 @@ a:focus {
   transition: color 0.3s ease-in-out;
 }
 
-.btn-design, .btn-design:hover {
+.btn-design,
+.btn-design:hover {
   background-color: transparent;
   color: white;
   border-radius: 50%;
@@ -355,7 +356,8 @@ a:focus {
   border: 2px solid rgb(143, 30, 30);
 }
 
-.btn-usability, .btn-usability:hover {
+.btn-usability,
+.btn-usability:hover {
   background-color: transparent;
   color: white;
   border-radius: 50%;
@@ -365,7 +367,8 @@ a:focus {
   border: 2px solid rgb(148, 148, 4);
 }
 
-.btn-content, .btn-content:hover {
+.btn-content,
+.btn-content:hover {
   background-color: transparent;
   color: white;
   border-radius: 50%;
@@ -384,3 +387,26 @@ a:focus {
   font-weight: 400;
 }
 
+.blog-section .card-img-top,
+.card-img-tops {
+  height: 200px;
+}
+.search-form {
+  margin-left: 300px;
+}
+/* on small device change height of the image */
+@media (max-width: 767px) {
+  .blog-section .card-img-top,
+  .card-img-tops {
+    height: 1000px;
+  }
+  .search-form {
+    margin-left: 0px;
+  }
+}
+
+.border-radius-around {
+  border-radius: 50%;
+  height: 40px;
+  width: 40px;
+}
