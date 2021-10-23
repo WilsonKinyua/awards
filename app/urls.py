@@ -7,6 +7,7 @@ urlpatterns = [
     path("", views.index, name="index"),
     path("profile/", views.profile, name="profile"),
     path("profile/update/", views.update_profile, name="update_profile"),
+    path("project/save/", views.save_project, name="save_project"),
 ]
 
 

@@ -16,7 +16,6 @@ def index(request):
 def profile(request):  # view profile
     current_user = request.user
     profile = Profile.objects.filter(user_id=current_user.id).first()
-
     return render(request, "profile.html", {"profile": profile})
 
 
@@ -65,3 +64,28 @@ def update_profile(request):
         # return render(request, 'profile.html', {'success': 'Profile Updated Successfully'})
     else:
         return render(request, 'profile.html', {'danger': 'Profile Update Failed'})
+
+
+# save project 
+@login_required(login_url="/accounts/login/")
+def save_project(request):
+    if request.method == 'POST':
+
+        current_user = request.user
+
+        title = request.POST['title']
+        description = request.POST['description']
+        url = request.POST['url']
+        image = request.FILES['image']
+        # crop image to square
+        image = cloudinary.uploader.upload(image, crop="limit", width=500, height=500)
+        # image = cloudinary.uploader.upload(image)
+        image_url = image['url']
+
+        project = Project(user_id=current_user.id,
+                          title=title, description=description, url=url, image=image_url)
+        project.save_project()
+
+        return redirect('/profile', {'success': 'Project Saved Successfully'})
+    else:
+        return render(request, 'profile.html', {'danger': 'Project Save Failed'})
