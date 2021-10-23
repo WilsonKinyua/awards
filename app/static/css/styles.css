@@ -10,7 +10,7 @@ body {
   background: #f4f7f6;
 }
 :root {
-  --main-color: #c5015f;
+  --main-color: rgb(0, 174, 255);
 }
 .headings {
   font-family: "Merienda", cursive;
@@ -31,7 +31,7 @@ a:focus {
 }
 
 .fa {
-  color: #c5015f;
+  color: rgb(0, 174, 255);
   font-size: 15px;
 }
 

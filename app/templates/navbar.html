@@ -12,8 +12,14 @@
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             </ul>
             <ul class="navbar-nav nav-right">
-                <li class="nav-item">
-                    <span class="nav-link text-dark">ARE YOU A MEMBER? <a href="/accounts/login" class="text-primary"><strong>REGISTER / LOG IN</strong></a></span>
+                <li class="nav-item text-center">
+                    {% if user.is_authenticated %}
+                    <span class="nav-link text-dark"><a href="/profile" class="text-primary"><i
+                                class="fa fa-user-alt"></i><br><strong>{{ user.username }}</strong></a></span>
+                    {% else %}
+                    <span class="nav-link text-dark">ARE YOU A MEMBER? <a href="/accounts/login"
+                            class="text-primary"><strong>LOG IN</strong></a></span>
+                    {% endif %}
                 </li>
             </ul>
         </div>

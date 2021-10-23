@@ -2,9 +2,9 @@
 {% load bootstrap5 %}
 {% block content %}
 <style>
-    .form-text .text-muted {
+    .form-text {
         display: none !important;
-      }
+    }
 </style>
 <section class="login-container">
     <div class="container-header">
@@ -17,7 +17,7 @@
                 <div class="login-card mt-5">
                     <div class="card-header">
                         <h3>Register</h3>
-                      </div>
+                    </div>
                     <div class="card-body">
                         <div class="login-container">
                             <form action="/accounts/register/" method="post">
@@ -30,7 +30,7 @@
                             </form>
                         </div>
                         <p>
-                            Don't have an account? <a href="" class="">Register</a>
+                            Don't have an account? <a href="/accounts/login" class="">Register</a>
                         </p>
                     </div>
                 </div>
