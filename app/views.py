@@ -15,28 +15,28 @@ def index(request):
 @login_required(login_url="/accounts/login/")
 def profile(request):  # view profile
     current_user = request.user
-    profile = Profile.objects.filter(user_id=current_user.id).first() # get profile
-    project=Project.objects.filter(user_id=current_user.id).all() # get all projects
+    profile = Profile.objects.filter(user_id=current_user.id).first()  # get profile
+    project = Project.objects.filter(user_id=current_user.id).all()  # get all projects
     return render(request, "profile.html", {"profile": profile, "images": project})
 
 
 @login_required(login_url="/accounts/login/")
 def update_profile(request):
-    if request.method == 'POST':
-    
+    if request.method == "POST":
+
         current_user = request.user
 
-        first_name = request.POST['first_name']
-        last_name = request.POST['last_name']
-        username = request.POST['username']
-        email = request.POST['email']
+        first_name = request.POST["first_name"]
+        last_name = request.POST["last_name"]
+        username = request.POST["username"]
+        email = request.POST["email"]
 
-        bio = request.POST['bio']
-        contact = request.POST['contact']
+        bio = request.POST["bio"]
+        contact = request.POST["contact"]
 
-        profile_image = request.FILES['profile_pic']
+        profile_image = request.FILES["profile_pic"]
         profile_image = cloudinary.uploader.upload(profile_image)
-        profile_url = profile_image['url']
+        profile_url = profile_image["url"]
 
         user = User.objects.get(id=current_user.id)
 
@@ -49,8 +49,12 @@ def update_profile(request):
             profile.contact = contact
             profile.save()
         else:
-            profile = Profile(user_id=current_user.id,
-                              profile_photo=profile_url, bio=bio,contact=contact)
+            profile = Profile(
+                user_id=current_user.id,
+                profile_photo=profile_url,
+                bio=bio,
+                contact=contact,
+            )
             profile.save_profile()
 
         user.first_name = first_name
@@ -60,33 +64,46 @@ def update_profile(request):
 
         user.save()
 
-        return redirect('/profile', {'success': 'Profile Updated Successfully'})
+        return redirect("/profile", {"success": "Profile Updated Successfully"})
 
         # return render(request, 'profile.html', {'success': 'Profile Updated Successfully'})
     else:
-        return render(request, 'profile.html', {'danger': 'Profile Update Failed'})
+        return render(request, "profile.html", {"danger": "Profile Update Failed"})
 
 
-# save project 
+# save project
 @login_required(login_url="/accounts/login/")
 def save_project(request):
-    if request.method == 'POST':
+    if request.method == "POST":
 
         current_user = request.user
 
-        title = request.POST['title']
-        description = request.POST['description']
-        url = request.POST['url']
-        image = request.FILES['image']
+        title = request.POST["title"]
+        description = request.POST["description"]
+        url = request.POST["url"]
+        image = request.FILES["image"]
         # crop image to square
         image = cloudinary.uploader.upload(image, crop="limit", width=500, height=500)
         # image = cloudinary.uploader.upload(image)
-        image_url = image['url']
+        image_url = image["url"]
 
-        project = Project(user_id=current_user.id,
-                          title=title, description=description, url=url, image=image_url)
+        project = Project(
+            user_id=current_user.id,
+            title=title,
+            description=description,
+            url=url,
+            image=image_url,
+        )
         project.save_project()
 
-        return redirect('/profile', {'success': 'Project Saved Successfully'})
+        return redirect("/profile", {"success": "Project Saved Successfully"})
     else:
-        return render(request, 'profile.html', {'danger': 'Project Save Failed'})
+        return render(request, "profile.html", {"danger": "Project Save Failed"})
+
+
+# delete project
+@login_required(login_url="/accounts/login/")
+def delete_project(request, id):
+    project = Project.objects.get(id=id)
+    project.delete_project()
+    return redirect("/profile", {"success": "Project Deleted Successfully"})
