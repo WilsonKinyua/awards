@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 from django.test import TestCase
-from .models import Project, Profile, DesignRate, UsabilityRate, ContentRate
+from .models import Project, Profile
 
 # Create your tests here.
 
@@ -61,29 +61,3 @@ class ProfileTestClass(TestCase):  # Profile class test
         profiles = Profile.objects.all()
         self.assertTrue(len(profiles) == 0)
 
-
-# class DesignRateTestClass(TestCase):  # DesignRate class test
-#     def setUp(self):
-#         # create a user
-#         user = User.objects.create(
-#             username="test_user", first_name="mzee", last_name="mzima"
-#         )
-
-#         self.design_rate = DesignRate(
-#             rate=1,
-#             user=user,
-#         )
-
-#     def test_instance(self):
-#         self.assertTrue(isinstance(self.design_rate, DesignRate))
-
-#     def test_save_method(self):
-#         self.design_rate.save_design_rate()
-#         design_rates = DesignRate.objects.all()
-#         self.assertTrue(len(design_rates) > 0)
-
-#     def test_delete_method(self):
-#         self.design_rate.save_design_rate()
-#         self.design_rate.delete_design_rate()
-#         design_rates = DesignRate.objects.all()
-#         self.assertTrue(len(design_rates) == 0)
