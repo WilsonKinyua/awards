@@ -10,7 +10,10 @@ import cloudinary.api
 
 def index(request): # Home page
     project = Project.objects.all()
-    return render(request, "index.html", {"projects": project})
+    # get the latest project from the database
+    latest_project = project[0]
+
+    return render(request, "index.html", {"projects": project, "project_home": latest_project})
 
 
 @login_required(login_url="/accounts/login/")
