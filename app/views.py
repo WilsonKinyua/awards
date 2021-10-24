@@ -5,6 +5,17 @@ import cloudinary
 import cloudinary.uploader
 import cloudinary.api
 
+
+# api
+from django.http import JsonResponse
+from rest_framework import status
+from django.http import Http404
+from rest_framework.response import Response
+from rest_framework.views import APIView
+from .serializer import ProfileSerializer
+from .permissions import IsAdminOrReadOnly
+
+
 # Create your views here.
 
 
@@ -173,3 +184,16 @@ def search_project(request):
     else:
         message = "You haven't searched for any term"
         return render(request, "search.html", {"message": message})
+
+
+
+# rest api ====================================
+class ProfileList(APIView):
+    permission_classes = (IsAdminOrReadOnly,)
+    def get(self, request, format=None):
+        all_profiles = Profile.objects.all()
+        serializers = ProfileSerializer(all_profiles, many=True)
+        return Response(serializers.data)
+
+    # def post(self, request, format=None):
+    #     serializers = MerchSerializer(data=request.data)
