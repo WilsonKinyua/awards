@@ -81,7 +81,7 @@ a:focus {
   color: var(--main-color);
 }
 .navbar-brand:hover {
-  color: #49c5b6;
+  color: #000000;
 }
 .navbar-expand-lg {
   background: #ffffff;
