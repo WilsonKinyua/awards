@@ -12,17 +12,21 @@ def index(request):  # Home page
     project = Project.objects.all()
     # get the latest project from the database
     latest_project = project[0]
+    # get project rating
+    rating = Rating.objects.filter(project_id=latest_project.id).first()
+    # print(latest_project.id)
 
     return render(
-        request, "index.html", {"projects": project, "project_home": latest_project}
+        request, "index.html", {"projects": project, "project_home": latest_project, "rating": rating}
     )
 
 
 # single project page
 def project_details(request, project_id):
     project = Project.objects.get(id=project_id)
-    # get des
-    return render(request, "project.html", {"project": project})
+    # get project rating
+    rating = Rating.objects.filter(project=project)
+    return render(request, "project.html", {"project": project, "rating": rating})
 
 
 @login_required(login_url="/accounts/login/")
@@ -142,6 +146,7 @@ def rate_project(request, id):
             design_rate=design_rate,
             usability_rate=usability_rate,
             content_rate=content_rate,
+            avg_rate=round((float(design_rate)+float(usability_rate)+float(content_rate))/3,2),
         )
 
         # get the avarage rate of the project for the three rates
@@ -151,7 +156,7 @@ def rate_project(request, id):
         project.rate=avg_rating
         project.update_project()
 
-        return render(request, "project.html", {"success": "Project Rated Successfully", "project": project})
+        return render(request, "project.html", {"success": "Project Rated Successfully", "project": project, "rating": Rating.objects.filter(project=project)})
     else:
         project = Project.objects.get(id=id)
         return render(request, "project.html", {"danger": "Project Rating Failed", "project": project})

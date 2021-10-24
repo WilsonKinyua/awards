@@ -10,31 +10,31 @@
                 <div class="col-md-8 text-center">
                     <div class="homepage-content">
                         <a href="">
-                            <h1 class="text-white text-bold">
+                            <h1 class="text-white text-bold text-capitalize">
                                 {{project_home.title }}
                             </h1>
                             <p class="author-home mt-2">
                                 by
                                 <strong>
-                                    <a href="/Archrival/">Archrival</a>
+                                    <a class="text-capitalize">{{project_home.user.username }}</a>
                                 </strong>
                                 <i>from</i>
-                                <strong>United States</strong>
-                                with
-                                <strong>7.53</strong>
+                                <strong class="text-capitalize">{{project_home.location }}</strong>
+                                <!-- with
+                                <strong>7.53</strong> -->
                             </p>
                             <div class="button-group mt-3">
                                 <div class="d-flex justify-content-center">
                                     <div>
-                                        <a class="btn btn-design"><span>7.8</span></a> <br>
+                                        <a class="btn btn-design"><span>{{ rating.design_rate }}</span></a> <br>
                                         <span>Design</span>
                                     </div>
                                     <div>
-                                        <a class="btn btn-usability"><span>7.8</span></a> <br>
+                                        <a class="btn btn-usability"><span>{{ rating.usability_rate }}</span></a> <br>
                                         <span>Usability</span>
                                     </div>
                                     <div>
-                                        <a class="btn btn-content"><span>7.8</span></a> <br>
+                                        <a class="btn btn-content"><span>{{ rating.content_rate }}</span></a> <br>
                                         <span>Content</span>
                                     </div>
                                 </div>

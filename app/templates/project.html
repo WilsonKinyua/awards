@@ -56,7 +56,7 @@
                     <div class="col-md-12">
                         {% if success %}
                         <div class="alert alert-success" role="alert">
-                           {{success}}
+                            {{success}}
                         </div>
                         {% elif danger %}
                         <div class="alert alert-danger" role="alert">
@@ -65,10 +65,45 @@
                         {% endif %}
                     </div>
                 </div>
+                <style>
+                    .btn-design,
+                    .btn-design:hover {
+                    background-color: transparent;
+                    color: white;
+                    height: 60px;
+                    width: 60px;
+                    font-weight: 800;
+                    border: 2px solid rgb(143, 30, 30);
+                    }
+
+                    .btn-usability,
+                    .btn-usability:hover {
+                    background-color: transparent;
+                    color: white;
+                    border-radius: 50%;
+                    font-weight: 800;
+                    height: 60px;
+                    width: 60px;
+                    border: 2px solid rgb(148, 148, 4);
+                    }
+
+                    .btn-content,
+                    .btn-content:hover {
+                    background-color: transparent;
+                    color: white;
+                    border-radius: 50%;
+                    font-weight: 800;
+                    height: 60px;
+                    width: 60px;
+                    border: 2px solid rgb(0, 174, 255);
+                    }
+
+                </style>
                 <div class="row card p-3">
                     <!-- <div class="card-header">
                         <h3>USER VOTES</h3>
                     </div> -->
+                    {% for rate in rating %}
                     <div class="col-md-12">
                         <div class="d-flex justify-content-between">
                             <div>
@@ -78,24 +113,24 @@
                                             alt="">
                                     </div>
                                     <div class="m-2">
-                                        <h5 class="text-capitalize">digital of things from Spain</h5>
-                                        <p><a href="" class="text-primary text-capitalize">digitalofthings.studio</a>
-                                        </p>
+                                        <h5 class="text-capitalize">{{ rate.user.first_name }} {{ rate.user.last_name }}</h5>
+                                        <p><a class="text-primary text-capitalize">{{ rate.user.username }}</a></p>
+                                        <span class="badge rounded-pill bg-info text-white">{{ rate.avg_rate }}</span>
                                     </div>
                                 </div>
                             </div>
                             <div>
-                                <div class="d-flex justify-content-center">
+                                <div class="d-flex justify-content-center text-center">
                                     <div class="m-1">
-                                        <a class="btn btn-design"><span class="text-dark">7.8</span></a> <br>
+                                        <a class="btn btn-design"><span class="text-dark">{{ rate.design_rate  }}</span></a> <br>
                                         <span>Design</span>
                                     </div>
                                     <div class="m-1">
-                                        <a class="btn btn-usability"><span class="text-dark">7.8</span></a> <br>
+                                        <a class="btn btn-usability"><span class="text-dark">{{ rate.usability_rate }}</span></a> <br>
                                         <span>Usability</span>
                                     </div>
                                     <div class="m-1">
-                                        <a class="btn btn-content"><span class="text-dark">7.8</span></a> <br>
+                                        <a class="btn btn-content"><span class="text-dark">{{ rate.content_rate }}</span></a> <br>
                                         <span>Content</span>
                                     </div>
                                 </div>
@@ -103,6 +138,7 @@
                         </div>
                     </div>
                     <hr>
+                    {% endfor %}
                 </div>
                 <div class="row">
                     <div class="col-md-12">

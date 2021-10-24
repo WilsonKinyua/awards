@@ -92,7 +92,8 @@ INSTALLED_APPS = [
     'app.apps.AppConfig',
     'bootstrap5',
     'cloudinary',
-    'rest_framework'
+    'rest_framework',
+    'mathfilters'
 ]
 
 MIDDLEWARE = [
