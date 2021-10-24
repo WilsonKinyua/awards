@@ -13,7 +13,7 @@
                             <h1 class="text-white text-bold text-capitalize">
                                 {{project_home.title }}
                             </h1>
-                            <p class="author-home mt-2">
+                            <p class="author-home mt-3">
                                 by
                                 <strong>
                                     <a class="text-capitalize">{{project_home.user.username }}</a>
@@ -23,7 +23,7 @@
                                 <!-- with
                                 <strong>7.53</strong> -->
                             </p>
-                            <div class="button-group mt-3">
+                            <div class="button-group mt-5">
                                 <div class="d-flex justify-content-center">
                                     <div>
                                         <a class="btn btn-design"><span>{{ rating.design_rate }}</span></a> <br>
@@ -40,6 +40,22 @@
                                 </div>
                             </div>
                         </a>
+                        <div class="row">
+                            <div class="col-md-1"></div>
+                            <div class="col-md-10">
+                                <!-- search input -->
+                                <form action="{% url 'search_project' %}" class="mt-5" >
+                                    <div class="input-group mb-3">
+                                        <input type="text" class="form-control" placeholder="Search for Project..." aria-label="Search for..."
+                                            aria-describedby="basic-addon2" name="search_term">
+                                        <div class="input-group-append">
+                                            <button class="btn" type="button">Search</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="col-md-1"></div>
+                        </div>
                     </div>
                 </div>
                 <div class="col-md-2"></div>
@@ -51,6 +67,7 @@
 <!-- blogs -->
 <section class="blog-section" id="posts">
     <div class="container mt-5">
+        
         <div class="row mt-4">
             {% for project in projects %}
             <div class="col-md-12 col-lg-3">

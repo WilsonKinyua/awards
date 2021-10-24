@@ -160,3 +160,16 @@ def rate_project(request, id):
     else:
         project = Project.objects.get(id=id)
         return render(request, "project.html", {"danger": "Project Rating Failed", "project": project})
+
+
+# search projects
+def search_project(request):
+    if 'search_term' in request.GET and request.GET["search_term"]:
+        search_term = request.GET.get("search_term")
+        searched_projects = Project.objects.filter(title__icontains=search_term)
+        message = f"Search For: {search_term}"
+
+        return render(request, "search.html", {"message": message, "projects": searched_projects})
+    else:
+        message = "You haven't searched for any term"
+        return render(request, "search.html", {"message": message})
