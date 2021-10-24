@@ -14,9 +14,9 @@ class Project(models.Model):
     image = CloudinaryField("image")
     url = models.URLField(blank=True)
     location = models.CharField(max_length=100, default="Nairobi")
-    design_rate = models.IntegerField(default=0, blank=True, null=True)
-    usability_rate = models.IntegerField(default=0, blank=True, null=True)
-    content_rate = models.IntegerField(default=0, blank=True, null=True)
+    rate = models.IntegerField(default=0, blank=True, null=True)
+    # usability_rate = models.IntegerField(default=0, blank=True, null=True)
+    # content_rate = models.IntegerField(default=0, blank=True, null=True)
     date = models.DateTimeField(auto_now_add=True, null=True)
 
     @classmethod
@@ -38,6 +38,12 @@ class Project(models.Model):
     def get_all_projects_by_user(cls, user):
         projects = cls.objects.filter(user=user)
         return projects
+
+    # update project
+    def update_project(self, **kwargs):
+        for key, value in kwargs.items():
+            setattr(self, key, value)
+        self.save()
 
     def save_project(self):
         self.save()

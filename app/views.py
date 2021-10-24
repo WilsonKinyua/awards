@@ -8,12 +8,20 @@ import cloudinary.api
 # Create your views here.
 
 
-def index(request): # Home page
+def index(request):  # Home page
     project = Project.objects.all()
     # get the latest project from the database
     latest_project = project[0]
 
-    return render(request, "index.html", {"projects": project, "project_home": latest_project})
+    return render(
+        request, "index.html", {"projects": project, "project_home": latest_project}
+    )
+
+
+# single project page
+def project_details(request, project_id):
+    project = Project.objects.get(id=project_id)
+    return render(request, "project.html", {"project": project})
 
 
 @login_required(login_url="/accounts/login/")
@@ -113,3 +121,32 @@ def delete_project(request, id):
     project = Project.objects.get(id=id)
     project.delete_project()
     return redirect("/profile", {"success": "Project Deleted Successfully"})
+
+
+# rate_project
+@login_required(login_url="/accounts/login/")
+def rate_project(request, id):
+    if request.method == "POST":
+
+        project = Project.objects.get(id=id)
+        current_user = request.user
+
+        design_rate=request.POST["design"]
+        usability_rate=request.POST["usability"]
+        content_rate=request.POST["content"]
+
+        DesignRate(project=project, user=current_user, rate=design_rate).save()
+        UsabilityRate(project=project, user=current_user, rate=usability_rate).save()
+        ContentRate(project=project, user=current_user, rate=content_rate).save()
+
+        # get the avarage rate of the project for the three rates
+        avg_rating= (int(design_rate)+int(usability_rate)+int(content_rate))/3
+
+        # update the project with the new rate
+        project.rate=avg_rating
+        project.update_project()
+
+        return render(request, "project.html", {"success": "Project Rated Successfully", "project": project})
+    else:
+        project = Project.objects.get(id=id)
+        return render(request, "project.html", {"danger": "Project Rating Failed", "project": project})
