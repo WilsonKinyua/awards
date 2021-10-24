@@ -77,93 +77,116 @@ class Profile(models.Model):
         return self.user.username
 
 
-# DesignRate models
-class DesignRate(models.Model):
-    project = models.ForeignKey(Project, on_delete=models.CASCADE)
+# rating models
+class Rating(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    rate = models.IntegerField(default=0)
+    project = models.ForeignKey(Project, on_delete=models.CASCADE)
+    design_rate = models.IntegerField(default=0, blank=True, null=True)
+    usability_rate = models.IntegerField(default=0, blank=True, null=True)
+    content_rate = models.IntegerField(default=0, blank=True, null=True)
+    date = models.DateTimeField(auto_now_add=True, null=True)
 
-    def save_design_rate(self):
+    def save_rating(self):
         self.save()
 
-    def delete_design_rate(self):
+    def delete_rating(self):
         self.delete()
 
     @classmethod
-    def get_design_rate(cls, id):
-        design_rate = DesignRate.objects.filter(project=id).all()
-        return design_rate
-
-    # calculate average design rate
-    @classmethod
-    def design_rate_average(cls, id):
-        design_rate = DesignRate.objects.filter(project=id).all()
-        sum = 0
-        for rate in design_rate:
-            sum += rate.rate
-        average = sum / len(design_rate)
-        return average
+    def filter_by_id(cls, id):
+        rating = Rating.objects.filter(id=id).first()
+        return rating
 
     def __str__(self):
-        return self.project.title
+        return self.user.username
+
+# # DesignRate models
+# class DesignRate(models.Model):
+#     project = models.ForeignKey(Project, on_delete=models.CASCADE)
+#     user = models.ForeignKey(User, on_delete=models.CASCADE)
+#     rate = models.IntegerField(default=0)
+
+#     def save_design_rate(self):
+#         self.save()
+
+#     def delete_design_rate(self):
+#         self.delete()
+
+#     @classmethod
+#     def get_design_rate(cls, id):
+#         design_rate = DesignRate.objects.filter(project=id).all()
+#         return design_rate
+
+#     # calculate average design rate
+#     @classmethod
+#     def design_rate_average(cls, id):
+#         design_rate = DesignRate.objects.filter(project=id).all()
+#         sum = 0
+#         for rate in design_rate:
+#             sum += rate.rate
+#         average = sum / len(design_rate)
+#         return average
+
+#     def __str__(self):
+#         return self.project.title
 
 
-# UsabilityRate models
-class UsabilityRate(models.Model):
-    project = models.ForeignKey(Project, on_delete=models.CASCADE)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    rate = models.IntegerField(default=0)
+# # UsabilityRate models
+# class UsabilityRate(models.Model):
+#     project = models.ForeignKey(Project, on_delete=models.CASCADE)
+#     user = models.ForeignKey(User, on_delete=models.CASCADE)
+#     rate = models.IntegerField(default=0)
 
-    # calculate average usablity rate
-    @classmethod
-    def usability_rate_average(cls, id):
-        usability_rate = UsabilityRate.objects.filter(project=id).all()
-        sum = 0
-        for rate in usability_rate:
-            sum += rate.rate
-        average = sum / len(usability_rate)
-        return average
+#     # calculate average usablity rate
+#     @classmethod
+#     def usability_rate_average(cls, id):
+#         usability_rate = UsabilityRate.objects.filter(project=id).all()
+#         sum = 0
+#         for rate in usability_rate:
+#             sum += rate.rate
+#         average = sum / len(usability_rate)
+#         return average
 
-    def save_usability_rate(self):
-        self.save()
+#     def save_usability_rate(self):
+#         self.save()
 
-    def delete_usability_rate(self):
-        self.delete()
+#     def delete_usability_rate(self):
+#         self.delete()
 
-    @classmethod
-    def get_usability_rate(cls, id):
-        usability_rate = UsabilityRate.objects.filter(project=id).all()
-        return usability_rate
+#     @classmethod
+#     def get_usability_rate(cls, id):
+#         usability_rate = UsabilityRate.objects.filter(project=id).all()
+#         return usability_rate
 
-    def __str__(self):
-        return self.project.title
+#     def __str__(self):
+#         return self.project.title
 
 
-# UsabilityRate models
-class ContentRate(models.Model):
-    project = models.ForeignKey(Project, on_delete=models.CASCADE)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    rate = models.IntegerField(default=0)
+# # UsabilityRate models
+# class ContentRate(models.Model):
+#     project = models.ForeignKey(Project, on_delete=models.CASCADE)
+#     user = models.ForeignKey(User, on_delete=models.CASCADE)
+#     rate = models.IntegerField(default=0)
 
-    @classmethod
-    def content_rate_average(cls, id):
-        content_rate = ContentRate.objects.filter(project=id).all()
-        sum = 0
-        for rate in content_rate:
-            sum += rate.rate
-        average = sum / len(content_rate)
-        return average
+#     @classmethod
+#     def content_rate_average(cls, id):
+#         content_rate = ContentRate.objects.filter(project=id).all()
+#         sum = 0
+#         for rate in content_rate:
+#             sum += rate.rate
+#         average = sum / len(content_rate)
+#         return average
 
-    def save_content_rate(self):
-        self.save()
+#     def save_content_rate(self):
+#         self.save()
 
-    def delete_content_rate(self):
-        self.delete()
+#     def delete_content_rate(self):
+#         self.delete()
 
-    @classmethod
-    def get_content_rate(cls, id):
-        content_rate = ContentRate.objects.filter(project=id).all()
-        return content_rate
+#     @classmethod
+#     def get_content_rate(cls, id):
+#         content_rate = ContentRate.objects.filter(project=id).all()
+#         return content_rate
 
-    def __str__(self):
-        return self.project.title
+#     def __str__(self):
+#         return self.project.title

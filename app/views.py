@@ -21,6 +21,7 @@ def index(request):  # Home page
 # single project page
 def project_details(request, project_id):
     project = Project.objects.get(id=project_id)
+    # get des
     return render(request, "project.html", {"project": project})
 
 
@@ -135,9 +136,13 @@ def rate_project(request, id):
         usability_rate=request.POST["usability"]
         content_rate=request.POST["content"]
 
-        DesignRate(project=project, user=current_user, rate=design_rate).save()
-        UsabilityRate(project=project, user=current_user, rate=usability_rate).save()
-        ContentRate(project=project, user=current_user, rate=content_rate).save()
+        Rating.objects.create(
+            project=project,
+            user=current_user,
+            design_rate=design_rate,
+            usability_rate=usability_rate,
+            content_rate=content_rate,
+        )
 
         # get the avarage rate of the project for the three rates
         avg_rating= (int(design_rate)+int(usability_rate)+int(content_rate))/3
