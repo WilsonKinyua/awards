@@ -38,8 +38,14 @@
                             {{ user.first_name }} {{ user.last_name }}
                         </h4>
                         <p>{{ user.username }}</p>
-                        <p><span class="badge rounded-pill bg-info text-white">
-                                {{ profile.contact }} </span></p>
+                        <p>
+                           
+                        {% if profile.contact %}
+                        <small>{{ profile.contact }}</small>
+                        {% else %}
+                        <span class="badge rounded-pill bg-info text-white">No contact</span>
+                        {% endif %}
+                        </p>
                         <p>
                             {% if profile.bio %}
                             <small>{{ profile.bio }}</small>
@@ -228,6 +234,9 @@
                                     </td>
                                 </tr>
                                 {% empty %}
+                                <tr>
+                                    <td colspan="4" class="text-center text-danger">No Projects!</td>
+                                </tr>
                                 {% endfor %}
                             </tbody>
                         </table>

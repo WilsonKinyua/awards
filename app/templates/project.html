@@ -138,10 +138,16 @@
                         </div>
                     </div>
                     <hr>
+                    {% empty %}
+                    <div class="col-md-12 text-center not-found">
+                        <i class="fa fa-exclamation"></i>
+                        <p>No votes yet!</p>
+                    </div>
                     {% endfor %}
                 </div>
                 <div class="row">
                     <div class="col-md-12">
+                        {% if user.is_authenticated %}
                         <div class="d-grid gap-2 mt-4">
                             <button class="btn" type="button" data-bs-toggle="modal"
                                 data-bs-target="#exampleModal">Vote</button>
@@ -183,6 +189,11 @@
                                 </div>
                             </div>
                         </div>
+                        {% else %}
+                        <div class="d-grid gap-2 mt-4">
+                            <a class="btn" href="{% url 'login' %}">Sign In to Vote</a>
+                        </div>
+                        {% endif %}
                     </div>
                 </div>
             </div>
