@@ -15,6 +15,7 @@ urlpatterns = [
     path("search/", views.search_project, name="search_project"),
     # api
     url(r'^api/profile/$', views.ProfileList.as_view()),
+    url(r'^api/project/$', views.ProjectList.as_view()),
 
 ]
 

@@ -12,7 +12,7 @@ from rest_framework import status
 from django.http import Http404
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from .serializer import ProfileSerializer
+from .serializer import ProfileSerializer,ProjectSerializer
 from .permissions import IsAdminOrReadOnly
 
 
@@ -188,7 +188,7 @@ def search_project(request):
 
 
 # rest api ====================================
-class ProfileList(APIView):
+class ProfileList(APIView): # get all profiles
     permission_classes = (IsAdminOrReadOnly,)
     def get(self, request, format=None):
         all_profiles = Profile.objects.all()
@@ -197,3 +197,11 @@ class ProfileList(APIView):
 
     # def post(self, request, format=None):
     #     serializers = MerchSerializer(data=request.data)
+
+
+class ProjectList(APIView): # get all projects
+    permission_classes = (IsAdminOrReadOnly,)
+    def get(self, request, format=None):
+        all_projects = Project.objects.all()
+        serializers = ProjectSerializer(all_projects, many=True)
+        return Response(serializers.data)
